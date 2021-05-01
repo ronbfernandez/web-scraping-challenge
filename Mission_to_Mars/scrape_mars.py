@@ -9,7 +9,7 @@ def init_browser():
 
  # executable_path = {'executable_path': '/Users/cantu/Desktop/Mission-to-Mars'}
     # return Browser('chrome', **executable_path, headless=False)
-    exec_path = {'executable_path': '/app/.chromedriver/bin/chromedriver'}
+    exec_path = {'executable_path': ChromeDriverManager().install()}
     return Browser('chrome', headless=True, **exec_path)
 
 # Create Mission to Mars global dictionary that can be imported into Mongo
@@ -55,7 +55,7 @@ def scrape_mars_image():
         #browser.is_element_present_by_css("img.jpg", wait_time=1)
 
         # Visit Mars Space Images through splinter module
-        image_url_featured = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+        image_url_featured = 'https://spaceimages-mars.com/image/featured/mars3.jpg'
         browser.visit(image_url_featured)# Visit Mars Space Images through splinter module
 
         # HTML Object 
@@ -68,7 +68,7 @@ def scrape_mars_image():
         featured_image_url  = soup.find('article')['style'].replace('background-image: url(','').replace(');', '')[1:-1]
 
         # Website Url 
-        main_url = 'https://www.jpl.nasa.gov'
+        main_url = 'https://spaceimages-mars.com'
 
         # Concatenate website url with scrapped route
         featured_image_url = main_url + featured_image_url
